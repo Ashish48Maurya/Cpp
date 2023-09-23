@@ -9,7 +9,7 @@ int main(){
     for(int i=1; i<=n; i++){
         cin>>arr[i];
     }
-    for(int i=1; i<=n-1; i++){
+    for(int i=1; i<=n-1; i++){   //Outer loop will run n-1 times
         int min_idx = i;
         for(int j=i+1; j<=n; j++){
             if(arr[min_idx]>arr[j]){

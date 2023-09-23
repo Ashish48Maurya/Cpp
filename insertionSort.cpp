@@ -9,7 +9,7 @@ int main(){
     for(int i=0; i<n; i++){
         cin>>arr[i];
     }
-    for(int i=0; i<n; i++){
+    for(int i=1; i<n; i++){  //outer loop will run n-1 times
         int current_ele = arr[i];
         int j = i-1;
         while(arr[j]>current_ele && j>=0){

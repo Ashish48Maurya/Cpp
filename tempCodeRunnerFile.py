@@ -1,0 +1,1 @@
+Sita and Rama were friends. Rama was brave and strong.

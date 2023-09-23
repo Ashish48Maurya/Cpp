@@ -37,12 +37,14 @@ string infixToPostfix(string s){
         }
     }
 
-    // while(!st.empty()){
+    while(!st.empty()){
         res += st.top();
-    //     st.pop();
-    // }
+        st.pop();
+    }
+
     return res;
 }
+
 int main(){
     string s = "(a-b/c)*(a/k-l)";
     cout<<infixToPostfix(s)<<endl;

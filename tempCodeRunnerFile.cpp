@@ -1,2 +1,2 @@
-cout<<"Enter Size of Vector: ";
-cin>>size;
+string s3="nincompoop";
+    cout<<s3.length()<<endl;

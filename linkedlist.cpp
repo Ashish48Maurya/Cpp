@@ -280,7 +280,7 @@ return lists[0];
 }
 
 
-//If their is racing competition b/w 2 person  and if 1st person is running with speed x and other person is moving with speed 2x , than when 2nd person is reached to destination then first person is present at middle of track;
+//If their is racing competition b/w 2 person  and if 1st person is running with speed x and other person is running with speed 2x , than when 2nd person is reached to destination then first person is present at middle of track;
 
 //Same logic is applied here we are moving two pointer with speed x and 2x and when fast moving pointer reached at last node at that time slow moving pointer is present at middle node of LL and than we are returning that slow pointer;
 int findMiddleNode(Node* &head){

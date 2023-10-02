@@ -11,6 +11,7 @@ class node{
         Right = NULL;
     }
 };
+
 void inOrderTraversal(node* root){
     if(root==NULL){
         return;

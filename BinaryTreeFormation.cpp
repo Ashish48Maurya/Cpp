@@ -1,5 +1,6 @@
 #include<iostream>
 using namespace std;
+
 class node{
 public:
     int data;
@@ -11,6 +12,7 @@ public:
         Right = NULL;
     }
 };
+
 int main(){
     node* root = new node(1);
     root->Left = new node(2);

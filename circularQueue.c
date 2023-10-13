@@ -9,9 +9,10 @@ int back = -1;
 
 void push(int val)
 {
-    if (front == 0 && back == MAX - 1)
+    if ((front == 0 && back == MAX - 1) || (back == (front - 1) % (MAX - 1)))
     {
         printf("Queue is Full\n");
+        return;
     }
     else if (front == -1)
     {
@@ -75,23 +76,10 @@ int main()
     push(22);
     push(13);
     push(-6);
-
-    display();
-
+    push(7);
     pop();
-    pop();
+    push(11);
 
     display();
-
-    push(9);
-    push(20);
-    push(5);
-
-    display();
-
-    pop();
-    push(18);
-    display();
-
     return 0;
 }

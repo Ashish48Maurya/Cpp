@@ -2,7 +2,8 @@
     "files.associations": {
         "iostream": "cpp",
         "random": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "stdio.h": "c"
     },
     "[python]": {
         "editor.defaultFormatter": "ms-python.black-formatter"

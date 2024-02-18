@@ -14,4 +14,4 @@ int main(){
     cin>>n;
     cout<<factorial(n)<<endl;
     return 0;
-}     
+}

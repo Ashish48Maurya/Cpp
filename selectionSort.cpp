@@ -1,4 +1,5 @@
 #include<iostream>
+#include<algorithm>
 using namespace std;
 int main(){
     int n;
@@ -9,17 +10,21 @@ int main(){
     for(int i=1; i<=n; i++){
         cin>>arr[i];
     }
-    for(int i=1; i<=n-1; i++){   //Outer loop will run n-1 times
-        int min_idx = i;
-        for(int j=i+1; j<=n; j++){
-            if(arr[min_idx]>arr[j]){
-                min_idx = j;
+
+    for(int i=0; i<n-1; i++){
+        int minEle = arr[i];
+        int minEleIdx = i;
+
+        for(int j=i+1; j<n; j++){
+            if(minEle>arr[j]){
+                minEle = arr[j];
+                minEleIdx = j;
             }
         }
-        if(min_idx!=i){
-            swap(arr[min_idx],arr[i]);
-        }
+
+        swap(arr[minEleIdx] , arr[i]);
     }
+
     for(int i=1; i<=n; i++){
         cout<<arr[i]<<" ";
     }

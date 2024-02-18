@@ -3,7 +3,22 @@
         "iostream": "cpp",
         "random": "cpp",
         "ostream": "cpp",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "system_error": "cpp",
+        "array": "cpp",
+        "functional": "cpp",
+        "tuple": "cpp",
+        "type_traits": "cpp",
+        "utility": "cpp",
+        "string": "c",
+        "algorithm": "cpp",
+        "ctype.h": "c",
+        "stdbool.h": "c",
+        "stdlib.h": "c",
+        "string.h": "c",
+        "deque": "cpp",
+        "list": "cpp",
+        "vector": "cpp"
     },
     "[python]": {
         "editor.defaultFormatter": "ms-python.black-formatter"

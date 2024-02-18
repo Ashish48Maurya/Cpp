@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <ctype.h>
-
+char str[100];
 int stack[100];
 int top = -1;
 char *e;
@@ -22,10 +22,6 @@ void push(char e)
 
 int precedence(char e)
 {
-    if (e == '(')
-    {
-        return 0;
-    }
     if (e == '*' || e == '/')
     {
         return 2;
@@ -34,12 +30,13 @@ int precedence(char e)
     {
         return 1;
     }
-    return -1;
+    else{
+        return 0;
+    }
 }
 
 int main()
 {
-    char str[100];
     printf("Enter Infix Expression: ");
     scanf("%s", str);
     e = str;
@@ -49,6 +46,7 @@ int main()
         {
             push(*e);
         }
+        //Characters
         else if (isalnum(*e))
         {
             printf("%c", *e);

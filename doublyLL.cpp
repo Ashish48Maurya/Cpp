@@ -1,127 +1,122 @@
 #include<iostream>
 using namespace std;
+
 class Node{
     public:
-    int val;
-    Node* prev;
-    Node* next;
-
+    int data;
+    Node *next;
+    Node *prev;
     Node(int data){
-        val = data;
-        prev = NULL;
-        next = NULL;
+        this->data = data;
+        next = prev = NULL;
     }
 };
 
-void insertAtHead(Node* &head , int val){
-    Node* new_node = new Node(val);
+Node *head = NULL;
+
+void insertAtHead(int data){
+    Node* node = new Node(data);
     if(head==NULL){
-        head = new_node;
+        head = node;
         return;
     }
-    new_node->next = head;
-    head->prev = new_node;
-    head = new_node;
+    Node *temp = head;
+    node->next = temp;
+    temp->prev = node;
+    node->prev = NULL;
+    head = node;
 }
 
-void insertAtTail(Node* &head, int val){
-    Node* new_node = new Node(val);
-    Node* temp = head;
+void insertAtTail(int data){
+    Node* node = new Node(data);
     if(head==NULL){
-        head = new_node;
+        head = node;
         return;
     }
+    Node* temp = head;
     while(temp->next != NULL){
         temp = temp->next;
     }
-    temp->next = new_node;
-    new_node->prev = new_node;
+    temp->next = node;
+    node->prev = temp;
+    node->next = NULL;
 }
 
+void insertAtBw(int value){
+    int pos;
+    cin>>pos;
+    if(pos==1){
+        insertAtHead(value);
+        return;
+    }
+    Node* temp = head;
+    for(int i=1; i<pos-1; i++){
+        temp = temp->next;
+    }
+    Node *node = new Node(value);
+    node->next = temp->next;
+    node->prev = temp;
+    temp->next = node;
+    temp->next->prev = node;
+}
 
-void deleteAtHead(Node* &head){
-    Node* todelete = head;
+void deleteFront(){
+    if(head==NULL){return;}
+    Node* temp = head;
     head = head->next;
     head->prev = NULL;
-    delete todelete;
+    free(temp);
 }
 
-void delete_node(Node* &head , int pos){
-    if(pos==1){
-        deleteAtHead(head);
+void deleteEnd(){
+    if(head==NULL){
         return;
     }
     Node* temp = head;
-    int count = 1;
-    while(temp!=NULL and count!=pos){
-        temp=temp->next;
-        count++;
+    while(temp->next!=NULL){
+        temp = temp->next;
     }
-    if(temp->next != NULL){
-        temp->prev->next = temp->next;
-    }
-    temp->next = temp->prev;
-    delete temp;
+    Node *del = temp;
+    temp->prev->next = NULL;
+    free(del);
 }
 
-
-void insertAtPosition(Node* &head , int val, int pos){
-    if(pos==1){
-        insertAtHead(head,val);
-        return;
-    }
+void deleteBw(){
+    int pos;
+    cin>>pos;
     Node* temp = head;
-    int count = 1;
-    while(temp!=NULL and count<pos-1){
-        temp=temp->next;
-        count++;
+    for(int i=1; i<pos; i++){
+        temp = temp->next;
     }
-    Node* new_node = new Node(val);
-    new_node->next = temp->next;
-    temp->next->prev = new_node;
-    temp->next = new_node;
-    new_node->prev = temp;
+    temp->prev->next = temp->next;
+    temp->next->prev = temp->prev;
+    free(temp);
 }
 
-
-int length(Node* &head){ 
-    int l=0;
-    Node* temp =head;
+void display(){
+    Node* temp = head;
     while(temp!=NULL){
-        l++;
-        temp=temp->next;
+        cout<<temp->data<<" ";
+        temp = temp->next;
     }
-    return l;
-}
-
-
-
-void display(Node* &head){
-Node* temp = head;
-while(temp!=NULL){
-    cout<<temp->val<<" ";
-    temp=temp->next;
-}
+    cout<<endl;
 }
 
 int main(){
-    // Node* new_node = new Node(3);
-    // cout<<new_node->val<<endl;
+    insertAtHead(1);
+    insertAtHead(2);
+    insertAtHead(3);
+    insertAtTail(4);
+    insertAtTail(5);
+    insertAtTail(6);
+    // insertAtBw(5);
+    display();
+    // deleteFront();
+    // display();
+    // deleteEnd();
+    // deleteBw();
+    // display();
 
-    Node* head = NULL;
-    Node* tail = NULL;
-    insertAtHead(head,3);
-    insertAtHead(head,2);
-    insertAtTail(head,5);
-    insertAtHead(head,1);
-    insertAtTail(head,4);
-    insertAtTail(head,7);
-    display(head);
-    cout<<endl;
-    // delete_node(head,3);
-    // display(head);
 
-    // insertAtPosition(head,9,6);
-    // display(head);
     return 0;
 }

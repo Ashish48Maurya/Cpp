@@ -9,8 +9,11 @@ int prec(char ch){
     else if(ch=='*' || ch=='/'){
         return 2;
     }
+    else if(ch=='^'){
+        return 3;
+    }
     else{
-        return -1;
+        return 0;
     }
 }
 string infixToPrefix(string str){
@@ -50,6 +53,7 @@ string infixToPrefix(string str){
     return res;
 }
 int main(){
-    cout<<infixToPrefix("(a-b/c)*(a/k-l)");
+    // cout<<infixToPrefix("(a-b/c)*(a/k-l)");
+    cout<<infixToPrefix("(a+b^d)/((e-f)+g)");
     return 0;
 }

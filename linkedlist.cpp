@@ -94,12 +94,19 @@ void deleteAtPosition(Node* head, int pos){
         deleteAtHead(head);
         return;
     }
-int num = 0;
 Node* curr = head;
-while(num<pos-1){
-    num++;
+// int num = 0;
+// while(num<pos-1){
+//     num++;
+//     curr = curr->next;
+// }
+
+            //OR
+
+for(int i=1; i<pos-1; i++){
     curr = curr->next;
 }
+
 Node* temp  =  curr->next;
 curr->next =curr->next->next;
 free(temp);
@@ -158,14 +165,23 @@ bool same_or_not(Node* &head1 , Node* &head2){
 }
 
 
-int length(Node* &head){
-Node* temp = head;
-int length = 0;
-while(temp!=NULL){
-    ++length;
-    temp=temp->next;
-}
-return length;
+// int length(Node* &head){
+// Node* temp = head;
+// int length = 0;
+// while(temp!=NULL){
+//     ++length;
+//     temp=temp->next;
+// }
+// return length;
+// }
+int length(Node* head){
+    Node* temp = head;
+    int length = 1;
+    while(temp!=NULL){
+        length++;
+        temp = temp->next;
+    }
+    return length;
 }
 
 
@@ -225,7 +241,7 @@ int getIntersection(Node* &head1,Node* &head2){
 }
 
 
-//Given 2 sorted linked list merge them and return that mergerd sorted LL
+//Given 2 sorted linked list merge them and return that mergerd sorted LL without using extra space
 Node* merge_2_sorted_ll(Node* &head1, Node* &head2){
     //if linkdlist 1 is empty then return linked list 2;
     if(head1==NULL){
@@ -406,7 +422,7 @@ Node* rotateByK(Node* &head , int k){
     return new_head;
 }
 
-//swap 2-adjacent node of linked list  1->2->3->4->5->6   =>  2->1->4->3->6->5;Self work swap first 2 adj node and then attach 2nd node with the rest of the swapped LL recursive work =>  return the head of the rest swapped LL (i.e -> 3rd node)
+//swap 2-adjacent node of linked list  1->2->3->4->5->6   =>  2->1->4->3->6->5;Self work swap first 2 adj node and then attach 2nd node with the rest of the swapped LL,  recursive work =>  return the head of the rest swapped LL (i.e -> 3rd node)
 Node* swapAdj(Node* &head){
 if(head==NULL or head->next ==NULL){
     return head;    //Base Case;

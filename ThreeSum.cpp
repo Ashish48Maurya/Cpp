@@ -1,39 +1,40 @@
-#include<iostream>
-#include<vector>
-// #include<algorithm>  // for sort
+#include <iostream>
+#include <vector>
+#include <algorithm>
 using namespace std;
-int main(){
-    cout<<"Enter the value of n"<<endl;
-    int n; cin>>n;
-    cout<<"Enter the value of target"<<endl;
-    int target; cin>>target;
-    cout<<"Enter the array element"<<endl;
-    vector<int> v(n);
-    for(auto i:v){
-        cin>>v[i];
-    }
-    sort(v.begin() , v.end());
-    bool found = false;
-    for(int i=0; i<n; i++){
-        int L=i+1, R=n-1;
-        while(L<R){
-        int ans = v[i]+ v[L]+ v[R];
-        if(ans==target){
-            found=true;
+
+int main()
+{
+    vector<int> q = {4, 7, 0, 5, 2, 6, 1, 3}; // 0 1 2 3 4 5 6 7
+    sort(q.begin(), q.end());
+
+    int ele;
+    cout << "Enter Element Which you want to Search: ";
+    cin >> ele;
+    for (int i = 0; i < q.size() - 1; i++)
+    {
+        int x = q[i];
+
+        int first = i + 1;
+        int last = q.size() - 1;
+        // Kind of Binary Search
+        while (last > first)
+        {
+            if (first + last == ele - x)
+            {
+                cout << i <<" "<< first <<" "<< last << endl;
+                break;
+            }
+            else if (first + last > ele - x)
+            {
+                last--;
+            }
+            else
+            {
+                first++;
+            }
         }
-        if(ans>target){
-            L--;
-        }
-        else{
-            R++;
-        } 
-        }
     }
-    if(found){
-        cout<<"Triplet Exist"<<endl;
-    }
-    else{
-        cout<<"Triplet does'nt Exist"<<endl;
-    }
-return 0;
+
+    return 0;
 }

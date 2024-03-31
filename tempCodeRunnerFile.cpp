@@ -1,3 +1,1 @@
-else{
-        //     return 0;
-        // }
+// Preserve space in the encrypted text

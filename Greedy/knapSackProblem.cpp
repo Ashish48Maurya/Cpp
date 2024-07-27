@@ -25,6 +25,7 @@ int findMaxProfit(Item arr[] ,int W, int n){
         }
         else{
             int remainingWeight = W-weight;
+            weight += remainingWeight;
             profit += remainingWeight*(arr[i].p / arr[i].w);
         }
     }

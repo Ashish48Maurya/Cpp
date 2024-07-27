@@ -1,54 +1,64 @@
 #include<iostream>
 #include<vector>
 #include<climits>
-#include<algorithm>
 using namespace std;
 
-int solve1(vector<int> coins, int X){
-    if(X==0){
+int solve1(vector<int> coins,int coin){
+    if(coin==0){
         return 0;
     }
-    if(X<0){
-        return INT_MAX - 1;
+    if(coin<0){
+        return INT_MAX-1;
     }
-    int mini = INT_MAX;
+    int ans = INT_MAX;
     for(int i=0; i<coins.size(); i++){
-        int ans = 1 + solve1(coins,X-coins[i]);
-        mini = min(mini,ans);
+        ans = min(ans,solve1(coins,coin-coins[i]) + 1);
     }
-    return mini;
+    return ans;
 }
 
-int solve2(vector<int> coins,int X,vector<int> &dp){
-    if(X==0){
+int solve2(vector<int> coins,int coin,vector<int> &dp){
+    if(coin==0){
         return 0;
     }
-    if(X<0){
-        return INT_MAX - 1;
+    if(coin<0){
+        return INT_MAX-1;
+    }
+    if(dp[coin]!=-1){
+        return dp[coin];
     }
 
-    if(dp[X] != -1) return dp[X];
-
-    int mini = INT_MAX;
+    int ans = INT_MAX;
     for(int i=0; i<coins.size(); i++){
-        int ans = 1 + solve2(coins,X-coins[i],dp);
-        mini = min(mini,ans);
+        ans = min(ans,solve2(coins,coin-coins[i],dp) + 1);
     }
-
-    dp[X] = mini;
-    return mini;
+    return dp[coin] = ans;
 }
 
+int solve3(vector<int> coins,int coin){
+    vector<int> dp(coin+1,INT_MAX);
+    dp[0] = 0;
+    for(int i=1; i<=coin; i++){
+        for(int j=0; j<coins.size(); j++){
+            if(i-coins[j] >= 0 and dp[i-coins[j]]!=INT_MAX) 
+                dp[i] = min(dp[i],1+dp[i-coins[j]]);
+        }
+    }
+    return dp[coin];
+}
 
 int main(){
     vector<int> coins = {1,2,3};
-    int target = 7;
-    int n = target;
-
-    // int ans = solve1(coins,target);
-
-    vector<int> dp(n+1,-1);
-    int ans = solve2(coins,target,dp);
-    cout<<ans;
+    int coin = 9;
+    // int ans = solve1(coins,coin);
+    // vector<int> dp(coin+1,-1);
+    // int ans = solve2(coins,coin,dp);
+    int ans = solve3(coins,coin);
+    if(ans==INT_MAX){
+        cout<<"Ans : -1"<<endl;
+    }
+    else{
+        cout<<"Ans: "<<ans<<endl;
+    }
     return 0;
 }

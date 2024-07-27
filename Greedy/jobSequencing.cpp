@@ -40,7 +40,9 @@ vector<int> findProfit(Job arr[], int N){
             }
         }
     }
-
+    // for(auto i : schedule){
+    //     cout<<i<<" ";
+    // }cout<<endl;
     vector<int> ans;
     ans.push_back(count);
     ans.push_back(profit);

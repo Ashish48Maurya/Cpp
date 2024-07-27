@@ -10,7 +10,7 @@ because binary search me ham kisi bhi beech wale  number se suru karte hai searc
  using namespace std;
  int binarysearch (int array[], int n, int key){
     int s=0;    // s= starting point
-    int e=n;    // e= end point
+    int e=n-1;    // e= end point
     while(s<=e){
         int mid=(s+e)/2;
         if (array[mid]==key){

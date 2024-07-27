@@ -16,7 +16,7 @@ int activitySelection(vector<int> start, vector<int> end){
 
     sort(finalArray.begin(),finalArray.end(),cmp);
 
-    //Sorting Result
+    // Sorting Result
     // for(int i=0; i<N; i++){
     //     cout<<"{"<<finalArray[i].first<<","<<finalArray[i].second<<"}"<<endl;
     // }

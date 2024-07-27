@@ -29,7 +29,7 @@ string infixToPostfix(string s){
             st.pop();
         }
         else{
-            while(!st.empty() and prec(s[i])<prec(st.top())){
+            while(!st.empty() and prec(s[i])<=prec(st.top())){
                 res+=st.top();
                 st.pop();
             }

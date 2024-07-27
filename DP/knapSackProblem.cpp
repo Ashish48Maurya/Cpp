@@ -1,11 +1,12 @@
 #include<iostream>
 #include<vector>
-#include<algorithm>
 using namespace std;
-int solve1(vector<int> w, vector<int> p, int W, int index){
+
+int solve1(vector<int> weight,vector<int> profit,int index,int maxWeight){
+    //Case for handling 1st element
     if(index==0){
-        if(W>=w[0]){
-            return p[0];
+        if(weight[0] <= maxWeight){
+        return profit[0];
         }
         else{
             return 0;
@@ -13,44 +14,42 @@ int solve1(vector<int> w, vector<int> p, int W, int index){
     }
 
     int include = 0;
-    if(W>=w[index]){
-        include = p[index] + solve1(w,p,W-w[index],index-1);
+    if(maxWeight >= weight[index]){
+        include = profit[index] + solve1(weight,profit,index-1,maxWeight-weight[index]);
     }
+    int exclude = solve1(weight,profit,index-1,maxWeight);
 
-    int exclude = 0 + solve1(w,p,W,index-1);
     return max(include,exclude);
-    
 }
 
-int solve2(vector<int> w,vector<int> p,int W,int index, vector<vector<int>> &dp){
+int solve2(vector<int> weight,vector<int> profit,int index,int maxWeight,vector<vector<int>> &dp){
     if(index==0){
-        if(W>=w[0]){
-            return p[0];
+        if(weight[0] <= maxWeight){
+        return profit[0];
         }
         else{
             return 0;
         }
     }
 
-    if(dp[index][W]!=-1){
-        return dp[index][W];
+    if(dp[index][maxWeight]!=-1){
+        return dp[index][maxWeight];
     }
 
     int include = 0;
-    if(W>=w[index]){
-        include = p[index] + solve1(w,p,W-w[index],index-1);
+    if(maxWeight >= weight[index]){
+        include = profit[index] + solve2(weight,profit,index-1,maxWeight-weight[index],dp);
     }
+    int exclude = solve2(weight,profit,index-1,maxWeight,dp);
 
-    int exclude = 0 + solve1(w,p,W,index-1);
-    dp[index][W] = max(include,exclude);
-    return dp[index][W];
+    return dp[index][maxWeight] = max(include,exclude);
 }
 
-int solve3(vector<int> w,vector<int> p, int W, int n){
-    vector<vector<int>> dp(n,vector<int>(W+1,0));
-    for(int i = w[0]; i<=W; i++){
-        if(i>=w[0]){
-            dp[0][i] = p[0];
+int solve3(vector<int> weight,vector<int> profit,int n,int maxWeight){
+    vector<vector<int>> dp(n,vector<int> (maxWeight+1,0));
+    for(int i=0; i<=maxWeight; i++){
+        if(weight[0] <= maxWeight){
+        dp[0][i] = profit[0];
         }
         else{
             dp[0][i] = 0;
@@ -58,17 +57,16 @@ int solve3(vector<int> w,vector<int> p, int W, int n){
     }
 
     for(int index=1; index<n; index++){
-        for(int i=0; i<=W; i++){
-        int include = 0;
-        if(i>=w[index]){
-            include = p[index] + dp[index-1][i-w[index]];
-        }
-
-        int exclude = 0 + dp[index-1][i];
-        dp[index][i] = max(include,exclude);
+        for(int capacity=0; capacity<=maxWeight; capacity++){
+            int include = 0;
+            if(capacity >= weight[index]){
+                include = profit[index] + dp[index-1][capacity-weight[index]];
+            }
+            int exclude = 0 + dp[index-1][capacity];
+            dp[index][capacity] = max(include,exclude);
         }
     }
-    return dp[n-1][W];
+    return dp[n-1][maxWeight];
 }
 
 int main(){
@@ -76,12 +74,13 @@ int main(){
     vector<int> profit = {5,4,8,6};
     int n = weight.size();
     int maxWeight = 5;
-    // cout<<solve1(weight,profit,maxWeight,n-1);
 
-    // vector<vector<int>> dp(n,vector<int>(maxWeight+1,-1));
-    // cout<<solve2(weight,profit,maxWeight,n-1,dp);
+    // int ans = solve1(weight,profit,n-1,maxWeight);
 
-    cout<<solve3(weight,profit,maxWeight,n);
+    vector<vector<int>> dp(n,vector<int>(maxWeight+1,-1));
+    // int ans = solve2(weight,profit,n-1,maxWeight,dp);
 
+    int ans = solve3(weight,profit,n,maxWeight);
+    cout<<ans;
     return 0;
 }
